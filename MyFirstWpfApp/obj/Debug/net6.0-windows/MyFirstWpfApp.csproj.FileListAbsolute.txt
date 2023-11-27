@@ -21,3 +21,4 @@ D:\Dev\study\MyFirstWpfApp\MyFirstWpfApp\obj\Debug\net6.0-windows\MyFirstWpfApp.
 D:\Dev\study\MyFirstWpfApp\MyFirstWpfApp\obj\Debug\net6.0-windows\MyFirstWpfApp.genruntimeconfig.cache
 D:\Dev\study\MyFirstWpfApp\MyFirstWpfApp\obj\Debug\net6.0-windows\ref\MyFirstWpfApp.dll
 D:\Dev\study\MyFirstWpfApp\MyFirstWpfApp\obj\Debug\net6.0-windows\MyFirstWpfApp_MarkupCompile.lref
+D:\Dev\study\MyFirstWpfApp\MyFirstWpfApp\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs

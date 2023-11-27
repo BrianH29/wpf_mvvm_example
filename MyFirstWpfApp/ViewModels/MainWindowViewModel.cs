@@ -20,6 +20,12 @@ namespace MyFirstWpfApp.ViewModels
             set => SetProperty(ref _selectedPerson, value);
         }
 
+        private IList<bool>? _genderTypes = new List<bool>() { true, false };
+        public IList<bool>? GenderTypes
+        {
+            get => _genderTypes;
+        }
+
         public MainWindowViewModel()
         {
             People = new List<Person>

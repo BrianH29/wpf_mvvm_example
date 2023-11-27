@@ -3,27 +3,53 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MyFirstWpfApp.Views" xmlns:viewmodels="clr-namespace:MyFirstWpfApp.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        xmlns:c="clr-namespace:MyFirstWpfApp.Converter"
+        xmlns:local="clr-namespace:MyFirstWpfApp.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <c:BoolToGender x:Key="BoolToGender" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" DisplayMemberPath="Name" ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPerson, Mode=TwoWay}">
-            <!--<ListView.View>
+        <ListView Grid.Row="0" ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPerson, Mode=TwoWay}">
+            <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Gender" DisplayMemberBinding="{Binding Gender}" />
+                    <GridViewColumn Header="Name">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Gender">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox Width="60" 
+                                          ItemsSource="{Binding Path=DataContext.GenderTypes, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                          SelectedValue="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Converter={StaticResource BoolToGender}}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                    
+                                </ComboBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
-            </ListView.View>-->
+            </ListView.View>
         </ListView>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock Margin="5" Text="{Binding SelectedPerson.Id}"/>
             <TextBlock Margin="5" Text="{Binding SelectedPerson.Name}"/>
-            <TextBlock Margin="5" Text="{Binding SelectedPerson.Gender}"/>
+            <TextBlock Margin="5" Text="{Binding SelectedPerson.Gender, Converter={StaticResource BoolToGender}}"/>
         </StackPanel>
     </Grid>
 </Window>
